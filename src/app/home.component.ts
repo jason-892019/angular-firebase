@@ -3,16 +3,15 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-export class AppComponent implements OnInit {
-  title = 'angular-firebase';
-
+export class HomeComponent implements OnInit{
   dataSource : any;
   id : any;
   name : any;
   personalInfo : any;
+  inStock : any;
   editObj : any;
 
   @ViewChild('btnShow')

@@ -7,23 +7,33 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 
+import { environment } from '../environments/environment';
+import { HomeComponent } from './home.component';
+import { BrowseComponent } from './browse.component';
+import { CheckoutComponent } from './checkout.component';
+import { NgxPayPalModule } from 'ngx-paypal';
+import { GooglePayButtonModule } from '@google-pay/button-angular';
+
+import { NavComponent } from './nav.component';
+
+
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent, 
+    HomeComponent,
+    BrowseComponent,
+    CheckoutComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    AngularFireModule.initializeApp({
-      apiKey: "xxxxxxxxxxxxxxxxxxxxxxx",
-      authDomain: "js-scrambler-demo-app.firebaseapp.com",
-      projectId: "js-scrambler-demo-app",
-      storageBucket: "js-scrambler-demo-app.appspot.com",
-      messagingSenderId: "xxxxxxxxxxxx",
-      appId: "xxxxxxxxxxxxxxxxxxxxxxx"
-    }),
-    AngularFirestoreModule
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    NgxPayPalModule,
+    GooglePayButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
