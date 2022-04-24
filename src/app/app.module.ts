@@ -8,6 +8,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule } from '@angular/forms';
 
 import { environment } from '../environments/environment';
+<<<<<<< HEAD
 import { HomeComponent } from './home/home.component';
 import { BrowseComponent } from './browse/browse.component';
 import { CheckoutComponent } from './checkout/checkout.component';
@@ -20,6 +21,8 @@ import { HelpComponent } from './help/help.component';
 import { InfoComponent } from './info/info.component';
 
 
+=======
+>>>>>>> 5b9873d (database works)
 
 @NgModule({
   declarations: [
@@ -37,9 +40,13 @@ import { InfoComponent } from './info/info.component';
     AppRoutingModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
+<<<<<<< HEAD
     AngularFirestoreModule,
     NgxPayPalModule,
     GooglePayButtonModule
+=======
+    AngularFirestoreModule
+>>>>>>> 5b9873d (database works)
   ],
   providers: [],
   bootstrap: [AppComponent]
