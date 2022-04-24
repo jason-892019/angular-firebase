@@ -1,19 +1,17 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './browse.component.html',
+  styleUrls: ['./browse.component.scss']
 })
-export class AppComponent implements OnInit {
-  title = 'angular-firebase';
-
+export class BrowseComponent implements OnInit{
   dataSource : any;
   id : any;
   name : any;
-  personalInfo : any;
+  price : any;
+  inStock : any;
   editObj : any;
 
   @ViewChild('btnShow')
@@ -23,10 +21,8 @@ export class AppComponent implements OnInit {
 
 
 
-  constructor(private store: AngularFirestore, private location: Location) { }
-  
-  cancel() {
-    this.location.back(); // <-- go back to previous location on cancel
+  constructor(private store: AngularFirestore){
+    
   }
 
   ngOnInit(){
@@ -44,37 +40,38 @@ export class AppComponent implements OnInit {
   clearEdit(){
     this.editObj = null;
     this.name = "";
-    this.personalInfo = "";
+    this.price = "";
+    this.inStock = false;
   }
 
   add(){
     if(this.editObj){
-      this.store.collection('/user').doc(this.editObj.id).update({name : this.name, personalInfo : this.personalInfo});
+      this.store.collection('/product').doc(this.editObj.id).update({name : this.name, price : this.price, inStock: this.inStock});
     } else {
-      this.store.collection('/user').add({name : this.name, personalInfo : this.personalInfo});
+      this.store.collection('/product').add({name : this.name, price : this.price, inStock: this.inStock});
     }
     this.closeDialog();
   }
 
   edit(id : string){
-    this.store.collection('/user').doc(id).get().subscribe((response) => {
+    this.store.collection('/product').doc(id).get().subscribe((response) => {
       this.editObj = Object.assign({id : response.id}, response.data());
       this.name = this.editObj.name;
-      this.personalInfo = this.editObj.personalInfo;
+      this.price = this.editObj.price;
+      this.inStock = this.editObj.inStock;
       this.openDialog();
     })
   }
 
   delete(id : string){
-    this.store.collection('/user').doc(id).delete();
+    this.store.collection('/product').doc(id).delete();
   }
 
   getAll(){
-    this.store.collection('/user').snapshotChanges().subscribe((response) => {
+    this.store.collection('/product').snapshotChanges().subscribe((response) => {
       this.dataSource = response.map(item => {
         return Object.assign({id : item.payload.doc.id}, item.payload.doc.data())
       });
     })
   }
 }
-
